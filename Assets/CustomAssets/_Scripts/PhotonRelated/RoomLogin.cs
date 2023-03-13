@@ -3,7 +3,6 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
 using BWV.Player;
 
 public class RoomLogin : MonoBehaviourPunCallbacks
@@ -40,8 +39,9 @@ public class RoomLogin : MonoBehaviourPunCallbacks
 
         public override void OnJoinedRoom()
         {
-          GameObject playeInst = PhotonNetwork.Instantiate(avatarPrefab.name, Vector3.zero,Quaternion.identity);
-          GameManager.Instance.SetMyPlayer(playeInst.GetComponent<PlayerController>());
+            GameObject playeInst = PhotonNetwork.Instantiate(avatarPrefab.name, Vector3.zero,Quaternion.identity);
+            playeInst.name = "MyAvatar";
+            GameManager.Instance.SetMyPlayer(playeInst.GetComponent<PlayerController>());
         }
         public override void OnPlayerEnteredRoom(Player otherPlayer)
         {
