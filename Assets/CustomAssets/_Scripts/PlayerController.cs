@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
@@ -8,8 +7,13 @@ namespace BWV.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [Header ("To Destroy if not Owned by Player")]
+
         [SerializeField] 
-        private List<Component> m_Behaviour = new List<Component>();
+        private List<Component> m_Behaviour = new();
+        [SerializeField]
+        private List<GameObject> m_Object = new();
+
         public TMP_Text m_PlayerName;
         private PhotonView photonView;
 
@@ -23,13 +27,11 @@ namespace BWV.Player
                 {
                     Destroy(c);
                 }
+                foreach (GameObject g in m_Object)
+                {
+                    Destroy(g);
+                }
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

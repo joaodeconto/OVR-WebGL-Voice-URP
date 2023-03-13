@@ -11,6 +11,7 @@ namespace BWV.Photon
     {
         private Canvas canvas;
 
+        [SerializeField]
         private PhotonVoiceView photonVoiceView;
 
         [SerializeField]
@@ -28,7 +29,7 @@ namespace BWV.Photon
         {
             this.canvas = this.GetComponent<Canvas>();
             //if (this.canvas != null && this.canvas.worldCamera == null) { this.canvas.worldCamera = Camera.main; }
-            this.photonVoiceView = this.GetComponentInParent<PhotonVoiceView>();
+            //this.photonVoiceView = this.GetComponentInParent<PhotonVoiceView>();
         }
 
 
