@@ -19,13 +19,13 @@ namespace BWV.Player
         private List<GameObject> m_Object = new();
 
         public TMP_Text m_PlayerName;
-        public string m_AvatarUrl;
+        public string[] m_AvatarUrl;
 
         void Awake()
         {
             if (!photonView.IsMine)
             {
-                m_PlayerName.text = photonView.Owner.NickName;
+                m_PlayerName.text = photonView.Owner.UserId;
                 foreach (Component c in m_Behaviour)
                 {
                     Destroy(c);
@@ -39,11 +39,15 @@ namespace BWV.Player
         }
         void Start()
         {
-           if(photonView.IsMine) PlayerChanger.Instance.ChangePlayerAvatar(m_AvatarUrl);
         }
         public void OnPhotonInstantiate(PhotonMessageInfo info)
         {
             info.Sender.TagObject = this.gameObject;
+        }
+
+        public int WrapIndex(int index, int bufferLength)
+        {
+            return (index % bufferLength + bufferLength) % bufferLength;
         }
     }
 }

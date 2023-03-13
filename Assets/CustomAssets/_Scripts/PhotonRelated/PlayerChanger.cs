@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 using BWV.Player;
+using ReadyPlayerMe.AvatarLoader;
 
 public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
 {
@@ -37,8 +38,7 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void ChangePlayerAvatar(string avatarUrl)
     {
-        WebAvatarLoader.Instance.AvatarParent = GameManager.MyPlayer.gameObject;
-        WebAvatarLoader.Instance.OnWebViewAvatarGenerated(avatarUrl);
+        GameManager.MyPlayer.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().OnManualAvatarGenerated(avatarUrl);
         object[] data = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, avatarUrl };
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
         PhotonNetwork.RaiseEvent(2, data, raiseEventOptions, SendOptions.SendReliable);
@@ -84,9 +84,8 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
                     GameObject playerObject = (GameObject)p.TagObject;
                     if (playerObject != null)
                     {
-                        Debug.LogError(playerObject.name);
-                        WebAvatarLoader.Instance.AvatarParent = playerObject;
-                        WebAvatarLoader.Instance.OnWebViewAvatarGenerated(newUrl);
+                        Debug.LogError(playerObject.name + PhotonNetwork.LocalPlayer.ActorNumber + p.ActorNumber + newUrl);
+                        playerObject.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().OnManualAvatarGenerated(newUrl);
                     }
                     else Debug.LogError("Null Gameobject");
                     break;

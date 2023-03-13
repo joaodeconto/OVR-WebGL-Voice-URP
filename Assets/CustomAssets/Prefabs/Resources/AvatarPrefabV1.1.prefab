@@ -156,7 +156,11 @@ MonoBehaviour:
   m_Object:
   - {fileID: 6108796299386838983}
   m_PlayerName: {fileID: 8526899647275783986}
-  m_AvatarUrl: https://models.readyplayer.me/640d791bdf9bbb46314dfbc0.glb
+  m_AvatarUrl:
+  - https://models.readyplayer.me/640d791bdf9bbb46314dfbc0.glb
+  - https://models.readyplayer.me/640f5c47244143647eb57016.glb
+  - https://models.readyplayer.me/640ed537df9bbb46314f17a7.glb
+  - https://models.readyplayer.me/640f531ae8584648bb266813.glb
 --- !u!54 &6108796299934052414
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -568,7 +572,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6108796299386838983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.72, z: 0.077}
+  m_LocalPosition: {x: 0, y: 1.72, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -598,7 +602,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.18
+  near clip plane: 0.19
   far clip plane: 500
   field of view: 60
   orthographic: 0
@@ -971,6 +975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7238730333766214734}
+  - component: {fileID: 8903720236019922667}
   m_Layer: 0
   m_Name: WebAvatarLoader
   m_TagString: Untagged
@@ -993,3 +998,21 @@ Transform:
   m_Father: {fileID: 1611919257628993887}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8903720236019922667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8629190793706213937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 579002ecbbdf8cd45928e7a0dae34a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avatarParent: {fileID: 8629190793706213937}
+  m_AvatarUrl:
+  - https://models.readyplayer.me/640d791bdf9bbb46314dfbc0.glb
+  - https://models.readyplayer.me/640f5c47244143647eb57016.glb
+  - https://models.readyplayer.me/640ed537df9bbb46314f17a7.glb
+  - https://models.readyplayer.me/640f531ae8584648bb266813.glb
