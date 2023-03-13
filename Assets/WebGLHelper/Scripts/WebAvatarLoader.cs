@@ -2,6 +2,7 @@ using Photon.Pun;
 using ReadyPlayerMe.AvatarLoader;
 using ReadyPlayerMe.Core;
 using ReadyPlayerMe.Core.Data;
+using System;
 using UnityEngine;
 
 public class WebAvatarLoader : MonoBehaviourPunCallbacks
@@ -21,12 +22,21 @@ public class WebAvatarLoader : MonoBehaviourPunCallbacks
         
         WebInterface.SetupRpmFrame(partner.Subdomain);
 #endif
-        if (photonView.IsMine) OnWebViewAvatarGenerated(m_AvatarUrl[0]);
-        else OnManualAvatarGenerated(m_AvatarUrl[1]);
+
+        if (photonView.IsMine) OnWebViewAvatarGenerated(GameManager.AvatarUrlSO.CurrentUrl);
+        else OnManualAvatarGenerated(GetAvatarUrlFromInstantiate());
     }
-    
+
+    string GetAvatarUrlFromInstantiate()
+    {
+        object[] instantiationData = photonView.InstantiationData;
+        string avatarUrl = instantiationData[0].ToString();
+        return avatarUrl;
+    }
+
     public void OnWebViewAvatarGenerated(string generatedUrl)
     {
+        GameManager.AvatarUrlSO.AddAvatarUrl(generatedUrl);
         PlayerChanger.Instance.RaiseEventPlayerAvatar(generatedUrl);
         avatarLoader = new AvatarObjectLoader();
         avatarLoader.OnCompleted += (_, args) =>

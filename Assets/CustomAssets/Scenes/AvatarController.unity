@@ -2322,7 +2322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9058d05c4ae0248ad367ef5a1da1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_userId: 0
   avatarPrefab: {fileID: 2694966613629521298, guid: 8d3b85f5cfa67544d87f105f9ed1bef7,
     type: 3}
 --- !u!114 &1441933716
@@ -2350,6 +2349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerOptionsSO: {fileID: 11400000, guid: 3a02fcc153db01a44a716ed058ca5b67, type: 2}
+  _avatarUrlSO: {fileID: 11400000, guid: ba4abb3de487a334ca4d44f292bc2df5, type: 2}
 --- !u!114 &1441933718
 MonoBehaviour:
   m_ObjectHideFlags: 0

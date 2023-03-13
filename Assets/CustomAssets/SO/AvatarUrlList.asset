@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753c7cb46dd00054e9f467f397192ba4, type: 3}
+  m_Name: AvatarUrlList
+  m_EditorClassIdentifier: 
+  m_AvatarUrls:
+  - https://models.readyplayer.me/640d791bdf9bbb46314dfbc0.glb
+  - https://models.readyplayer.me/640f5c47244143647eb57016.glb
+  - https://models.readyplayer.me/640ed537df9bbb46314f17a7.glb
+  - https://models.readyplayer.me/640f531ae8584648bb266813.glb
+  - https://models.readyplayer.me/640f7a7437dc29db746042a3.glb
+  - https://models.readyplayer.me/640f969337dc29db7460760a.glb
+  CurrentUrl: https://models.readyplayer.me/640f531ae8584648bb266813.glb
