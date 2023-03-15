@@ -38,7 +38,7 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void ChangePlayerAvatar(string avatarUrl)
     {
-        GameManager.MyPlayer.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().RemoteAvatarGenerated(avatarUrl);
+        GameManager.MyPlayer.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().PlayerAvatarGenerated(avatarUrl);
         object[] data = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, avatarUrl };
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
         PhotonNetwork.RaiseEvent(2, data, raiseEventOptions, SendOptions.SendReliable);

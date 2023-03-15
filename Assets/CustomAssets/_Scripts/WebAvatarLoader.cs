@@ -82,6 +82,8 @@ public class WebAvatarLoader : MonoBehaviourPunCallbacks
         AvatarSetup avatarSetup = avatar.AddComponent<AvatarSetup>();
         avatarSetup.avatarSettings = avatarSettings;
         avatarSetup.SetupAvatar(avatar);
+        Animator anim = avatar.gameObject.GetComponent<Animator>();
+        anim.applyRootMotion = false;
         animatorController.animator = avatar.gameObject.GetComponent<Animator>();
         avatar.AddComponent<PhotonAnimatorView>();
         avatar.AddComponent<EyeAnimationHandler>();

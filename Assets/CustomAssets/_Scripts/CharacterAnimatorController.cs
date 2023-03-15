@@ -28,7 +28,7 @@ namespace BWV.Player
                 animator.SetFloat("Speed", speed * speedMultiplier);
                 animator.SetFloat("Strafe", moveInput.x);
                 animator.SetFloat("Forward", moveInput.y);
-                Debug.LogError(moveInput.y);
+                //Debug.LogError(moveInput.y);
                 //animator.SetBool("IsRunning", characterInput.IsRunning());
                 //animator.SetBool("IsJumping", characterInput.IsJumping());
                 //animator.SetBool("IsFalling", characterInput.IsFalling());
