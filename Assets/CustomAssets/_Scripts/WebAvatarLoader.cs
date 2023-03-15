@@ -2,6 +2,7 @@ using BWV;
 using BWV.Player;
 using Photon.Pun;
 using ReadyPlayerMe.AvatarLoader;
+using ReadyPlayerMe.Core.Data;
 using UnityEngine;
 
 

@@ -34,7 +34,7 @@ var config = {
     streamingAssetsUrl: "StreamingAssets",
     companyName: "BWV",
     productName: "OVRWebURP",
-    productVersion: "0.1.0",
+    productVersion: "0.1.1",
     showBanner: unityShowBanner,
 };
 
