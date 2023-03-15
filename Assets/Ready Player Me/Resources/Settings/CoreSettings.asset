@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b50d26d65b1fce41a02e310760cd025, type: 3}
-  m_Name: AvatarLoaderSettings
+  m_Script: {fileID: 11500000, guid: f12696b20f2e49519c1b2a403a76778b, type: 3}
+  m_Name: CoreSettings
   m_EditorClassIdentifier: 
-  AvatarCachingEnabled: 0
-  AvatarConfig: {fileID: 11400000, guid: 99552ccf737554f2fab58e864f9416e4, type: 2}
-  GLTFDeferAgent: {fileID: 0}
+  Subdomain: metaversando
+  EnableLogging: 0

@@ -38,7 +38,7 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void ChangePlayerAvatar(string avatarUrl)
     {
-        GameManager.MyPlayer.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().OnManualAvatarGenerated(avatarUrl);
+        GameManager.MyPlayer.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().RemoteAvatarGenerated(avatarUrl);
         object[] data = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, avatarUrl };
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
         PhotonNetwork.RaiseEvent(2, data, raiseEventOptions, SendOptions.SendReliable);
@@ -85,7 +85,7 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
                     if (playerObject != null)
                     {
                         Debug.LogError(playerObject.name + PhotonNetwork.LocalPlayer.ActorNumber + p.ActorNumber + newUrl);
-                        playerObject.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().OnManualAvatarGenerated(newUrl);
+                        playerObject.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().RemoteAvatarGenerated(newUrl);
                     }
                     else Debug.LogError("Null Gameobject");
                     break;
