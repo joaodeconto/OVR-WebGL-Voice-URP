@@ -1,10 +1,10 @@
 using BWV;
 using BWV.Player;
 using Photon.Pun;
-using Photon.Realtime;
-using ReadyPlayerMe.AvatarLoader;
 using ReadyPlayerMe.Core.Data;
+using ReadyPlayerMe.AvatarLoader;
 using UnityEngine;
+
 
 public class WebAvatarLoader : MonoBehaviourPunCallbacks
 {
@@ -49,8 +49,7 @@ public class WebAvatarLoader : MonoBehaviourPunCallbacks
         avatarLoader.OnCompleted += (_, args) =>
         {
             this.avatar = args.Avatar;
-            animatorController.animator = avatar.GetComponent<Animator>();
-            SetupAvatarGameObject(true);
+            SetupAvatar(true);
         };
         LoadingHelper.Instance.HideLoadingScreen();
         avatarLoader.LoadAvatar(generatedUrl);
@@ -59,23 +58,48 @@ public class WebAvatarLoader : MonoBehaviourPunCallbacks
 
     public void RemoteAvatarGeneration(string generatedUrl)
     {
-        GameManager.AvatarUrlSO.AddAvatarUrl(generatedUrl);
         if (avatar != null) GameObject.DestroyImmediate(avatar);
 
         avatarLoader = new AvatarObjectLoader();
         avatarLoader.OnCompleted += (_, args) =>
         {
             this.avatar = args.Avatar;
-            SetupAvatarGameObject(false);
+            SetupAvatar(false);
         };
         avatarLoader.LoadAvatar(generatedUrl);
     }
 
-    private void SetupAvatarGameObject(bool isPlayer)
-    {        
+    private void SetupAvatar(bool isPlayer)
+    {
         avatar.transform.parent = avatarParent.transform;
-        AvatarSetup avatarSetup = avatar.AddComponent<AvatarSetup>();        
+        AvatarSetup avatarSetup = avatar.AddComponent<AvatarSetup>();
         avatarSetup.avatarSettings = avatarSettings;
-        avatarSetup.SetupAvatar(avatar, isPlayer);        
+        avatarSetup.SetupAvatar(avatar);
+        Animator animator= avatar.gameObject.GetComponent<Animator>();
+        if (isPlayer) animatorController.animator = animator;
+        animator.applyRootMotion = false;
+        animator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("AvatarController");
+        SetupSynchronizeParameters();
+        avatar.AddComponent<EyeAnimationHandler>();
+        avatar.AddComponent<VoiceHandler>();
+    }
+
+    void SetupSynchronizeParameters()
+    {
+        PhotonAnimatorView photonAnimator = avatar.AddComponent<PhotonAnimatorView>();
+        photonAnimator.SetLayerSynchronized(0, PhotonAnimatorView.SynchronizeType.Discrete);
+        foreach (var a in photonAnimator.GetSynchronizedParameters())
+        {
+            Debug.LogError(a.SynchronizeType + "    " + a.Name);
+            //a.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+        }
+        //photonAnimator.SetParameterSynchronized("Forward", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Continuous);
+        photonAnimator.SetParameterSynchronized("Strafe", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Discrete);
+        photonAnimator.SetParameterSynchronized("Speed", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Discrete);
+        foreach (var a in photonAnimator.GetSynchronizedParameters())
+        {
+            Debug.LogError(a.SynchronizeType + "    " + a.Name);
+            //a.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
+        }
     }
 }
