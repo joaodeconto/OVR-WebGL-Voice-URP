@@ -4,7 +4,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using BWV.Player;
-using Photon.Voice.PUN.UtilityScripts;
 
 public class RoomLogin : MonoBehaviourPunCallbacks
 {
@@ -38,7 +37,7 @@ public class RoomLogin : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        InstantiateAvatar();
+        //InstantiateAvatar();
     }
     public override void OnPlayerEnteredRoom(Player otherPlayer)
     {
@@ -64,22 +63,9 @@ public class RoomLogin : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
-
     public void SetPlayerName(string playerName)
     {
         PhotonNetwork.NickName = playerName;
-    }
-
-    private void InstantiateAvatar()
-    {
-        GameManager.AvatarUrlSO.CurrentUrl = GameManager.AvatarUrlSO.GetAvatarUrl(Random.Range(0, 5));
-        object[] objects = new object[2];
-        objects[0] = GameManager.AvatarUrlSO.CurrentUrl;
-        objects[1] = PhotonNetwork.NickName;
-        GameManager.AvatarUrlSO.CurrentUrl = objects[0].ToString();
-        GameObject playeInst = PhotonNetwork.Instantiate(avatarPrefab.name, Vector3.zero, Quaternion.identity, 0, objects);
-        playeInst.name = "MyAvatar";
-        GameManager.Instance.SetMyPlayer(playeInst.GetComponent<PlayerController>());
     }
 
     public int WrapIndex(int index, int bufferLength)

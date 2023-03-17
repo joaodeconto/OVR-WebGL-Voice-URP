@@ -20,11 +20,10 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         // Set the new name for the local player
         PhotonNetwork.NickName = newName;
-        GameManager.MyPlayer.m_PlayerName.text = newName;
         // Send a custom event to inform other players of the name change
         object[] data = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, newName};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
-        PhotonNetwork.RaiseEvent(1, data, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent(3, data, raiseEventOptions, SendOptions.SendReliable);
         Debug.LogError("Raised Event Change Player Name");
     }
 
@@ -38,16 +37,17 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void ChangePlayerAvatar(string avatarUrl)
     {
-        GameManager.MyPlayer.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().PlayerAvatarGeneration(avatarUrl);;
+        GameManager.MyPlayer.transform.Find("WebAvatarLoader").GetComponent<WebAvatarLoader>().PlayerAvatarGeneration(avatarUrl);
         object[] data = new object[] { PhotonNetwork.LocalPlayer.ActorNumber, avatarUrl };
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
         PhotonNetwork.RaiseEvent(2, data, raiseEventOptions, SendOptions.SendReliable);
-        Debug.LogError(GameManager.MyPlayer.transform.name + PhotonNetwork.LocalPlayer.ActorNumber + avatarUrl);         Debug.Log("ChangePlayerAvatar and Raised Event Change Player Avatar");
+        Debug.Log(GameManager.MyPlayer.transform.name + PhotonNetwork.LocalPlayer.ActorNumber + avatarUrl);
+        Debug.Log("ChangePlayerAvatar and Raised Event Change Player Avatar");
     }
 
     public void OnEvent(EventData photonEvent)
     {
-        if (photonEvent.Code == 1)
+        if (photonEvent.Code == 3)
         {
             object[] data = (object[])photonEvent.CustomData;
 
@@ -62,7 +62,7 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
                     GameObject playerObject = p.TagObject as GameObject;
                     if (playerObject != null)
                     {
-                        playerObject.GetComponent<PlayerController>().m_PlayerName.text = newName;
+                        //playerObject.GetComponent<PlayerController>().m_PlayerName.text = newName;
                     }
                     else Debug.LogError("Null Gameobject");
                     break;
@@ -84,7 +84,8 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
                     GameObject playerObject = (GameObject)p.TagObject;
                     if (playerObject != null)
                     {
-                        Debug.LogError(playerObject.name);
+                        Debug.Log(playerObject.name + PhotonNetwork.LocalPlayer.ActorNumber + p.ActorNumber + newUrl);
+                        playerObject.GetComponent<WebAvatarLoader>().RemoteAvatarGeneration(newUrl);
                     }
                     else Debug.LogError("Null Gameobject");
                     break;

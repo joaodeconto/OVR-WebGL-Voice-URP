@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public Toggle flyPlayerToggle;
     public Toggle flyForwardToggle;
+    public Toggle gravityToggle;
     public static TMP_Text gptResponse;
 
     private void OnEnable()
@@ -16,8 +17,9 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
-        flyPlayerToggle.isOn = GameManager.PlayerOptions.flyPlayer;
-        flyForwardToggle.isOn = GameManager.PlayerOptions.flyForward;        
+        flyPlayerToggle.isOn = GameManager.PlayerOptions.Levitate;
+        flyForwardToggle.isOn = GameManager.PlayerOptions.FlyForward;
+        gravityToggle.isOn = GameManager.PlayerOptions.GravityOn;
     }
     public void OnCreateAvatar()
     {

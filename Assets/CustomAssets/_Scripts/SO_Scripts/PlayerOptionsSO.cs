@@ -25,7 +25,17 @@ public class PlayerOptionsSO : ScriptableObject
     public float xMax = 80f;
     public float xMin = -70f;
 
-    public bool FlyForward { get { return flyForward; } set { flyForward = value; } }
-    public bool Levitate { get { return flyPlayer; } set { flyPlayer = value; } }
-    public bool GravityOn { get { return gravityOn; } set { gravityOn = value; } }
+    public bool FlyForward { get { return flyForward; } set { flyForward = value; if (flyPlayer || flyForward) GravityOn = false; else GravityOn = true; } }
+    public bool Levitate { get { return flyPlayer; } set { flyPlayer = value; if (flyPlayer || flyForward) GravityOn = false; else GravityOn = true; } }
+    public bool GravityOn
+    {
+        get
+        {
+                return gravityOn; 
+        }
+        set 
+        {
+            gravityOn = value; 
+        }
+    }
 }
