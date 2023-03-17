@@ -1,10 +1,10 @@
 using BWV;
 using BWV.Player;
 using Photon.Pun;
+using Photon.Realtime;
 using ReadyPlayerMe.AvatarLoader;
 using ReadyPlayerMe.Core.Data;
 using UnityEngine;
-
 
 public class WebAvatarLoader : MonoBehaviourPunCallbacks
 {
@@ -26,8 +26,8 @@ public class WebAvatarLoader : MonoBehaviourPunCallbacks
         WebInterface.SetupRpmFrame(partner.Subdomain);
 #endif
 
-        if (photonView.IsMine) PlayerAvatarGenerated(GameManager.AvatarUrlSO.CurrentUrl);
-        else RemoteAvatarGenerated(GetAvatarUrlFromInstantiate());
+        if (photonView.IsMine) PlayerAvatarGeneration(GameManager.AvatarUrlSO.CurrentUrl);
+        else RemoteAvatarGeneration(GetAvatarUrlFromInstantiate());
     }
 
     string GetAvatarUrlFromInstantiate()
@@ -37,7 +37,7 @@ public class WebAvatarLoader : MonoBehaviourPunCallbacks
         return avatarUrl;
     }
 
-    public void PlayerAvatarGenerated(string generatedUrl)
+    public void PlayerAvatarGeneration(string generatedUrl)
     {
         GameManager.AvatarUrlSO.AddAvatarUrl(generatedUrl);
         PlayerChanger.Instance.RaiseEventPlayerAvatar(generatedUrl);
@@ -48,46 +48,34 @@ public class WebAvatarLoader : MonoBehaviourPunCallbacks
         LoadingHelper.Instance.ShowLoadingScreen();
         avatarLoader.OnCompleted += (_, args) =>
         {
-            this.avatar = args.Avatar;            
-            SetupPlayerAvatar();
+            this.avatar = args.Avatar;
+            animatorController.animator = avatar.GetComponent<Animator>();
+            SetupAvatarGameObject(true);
         };
         LoadingHelper.Instance.HideLoadingScreen();
         avatarLoader.LoadAvatar(generatedUrl);
         
     }
 
-    public void RemoteAvatarGenerated(string generatedUrl)
+    public void RemoteAvatarGeneration(string generatedUrl)
     {
+        GameManager.AvatarUrlSO.AddAvatarUrl(generatedUrl);
         if (avatar != null) GameObject.DestroyImmediate(avatar);
 
         avatarLoader = new AvatarObjectLoader();
         avatarLoader.OnCompleted += (_, args) =>
         {
             this.avatar = args.Avatar;
-            SetupRemoteAvatar();
+            SetupAvatarGameObject(false);
         };
         avatarLoader.LoadAvatar(generatedUrl);
     }
 
-    private void SetupRemoteAvatar()
-    {
+    private void SetupAvatarGameObject(bool isPlayer)
+    {        
         avatar.transform.parent = avatarParent.transform;
-        AvatarSetup avatarSetup = avatar.AddComponent<AvatarSetup>();
+        AvatarSetup avatarSetup = avatar.AddComponent<AvatarSetup>();        
         avatarSetup.avatarSettings = avatarSettings;
-        avatarSetup.SetupAvatar(avatar);
-    }
-
-    private void SetupPlayerAvatar()
-    {
-        avatar.transform.parent = avatarParent.transform;
-        AvatarSetup avatarSetup = avatar.AddComponent<AvatarSetup>();
-        avatarSetup.avatarSettings = avatarSettings;
-        avatarSetup.SetupAvatar(avatar);
-        Animator anim = avatar.gameObject.GetComponent<Animator>();
-        anim.applyRootMotion = false;
-        animatorController.animator = avatar.gameObject.GetComponent<Animator>();
-        avatar.AddComponent<PhotonAnimatorView>();
-        avatar.AddComponent<EyeAnimationHandler>();
-        avatar.AddComponent<VoiceHandler>();
+        avatarSetup.SetupAvatar(avatar, isPlayer);        
     }
 }

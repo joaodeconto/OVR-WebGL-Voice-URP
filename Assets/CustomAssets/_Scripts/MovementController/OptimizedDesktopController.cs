@@ -10,6 +10,7 @@ namespace BWV.Player
         [SerializeField] private Camera playerCamera;
 
         private Quaternion targetRotation;
+        private Rigidbody playerRigidbody;
         private PlayerInput playerInput;
         private float xRotation = 0;
 
@@ -23,6 +24,7 @@ namespace BWV.Player
 
         private void Start()
         {
+            playerRigidbody = GetComponent<Rigidbody>();
             targetRotation = transform.rotation;
             playerCamera = playerCamera == null ? Camera.main : playerCamera;
         }
@@ -31,6 +33,8 @@ namespace BWV.Player
         {
             Vector2 moveInput = GetMoveInput();
             Vector2 viewInput = GetViewInput();
+
+            playerRigidbody.useGravity = !playerOptions.gravityOn;
 
             if (playerOptions.movePlayer)
             {
@@ -69,6 +73,11 @@ namespace BWV.Player
                 Vector3 velocity = flyVertical * playerOptions.flySpeed;
                 transform.position += velocity * Time.deltaTime;
             }
+        }
+
+        void RestorePlayerPosition()
+        {
+            transform.position = new Vector3(0, 2, 0);
         }
 
         public Vector2 GetMoveInput()

@@ -72,8 +72,9 @@ public class RoomLogin : MonoBehaviourPunCallbacks
 
     private void InstantiateAvatar()
     {
+        GameManager.AvatarUrlSO.CurrentUrl = GameManager.AvatarUrlSO.GetAvatarUrl(Random.Range(0, 5));
         object[] objects = new object[2];
-        objects[0] = GameManager.AvatarUrlSO.CurrentUrl == null ? GameManager.AvatarUrlSO.GetAvatarUrl(WrapIndex(photonView.Owner.ActorNumber, 5)): GameManager.AvatarUrlSO.CurrentUrl;
+        objects[0] = GameManager.AvatarUrlSO.CurrentUrl;
         objects[1] = PhotonNetwork.NickName;
         GameManager.AvatarUrlSO.CurrentUrl = objects[0].ToString();
         GameObject playeInst = PhotonNetwork.Instantiate(avatarPrefab.name, Vector3.zero, Quaternion.identity, 0, objects);

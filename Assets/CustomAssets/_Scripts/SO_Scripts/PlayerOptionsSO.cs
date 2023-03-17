@@ -11,6 +11,7 @@ public class PlayerOptionsSO : ScriptableObject
     public float speedRunningMultiplier = 2f;
 
     [Header("Fly")]
+    public bool gravityOn = true;
     public bool flyPlayer = true;
     public bool flyForward = true;
     public float flySpeed = 2.0f;
@@ -26,4 +27,5 @@ public class PlayerOptionsSO : ScriptableObject
 
     public bool FlyForward { get { return flyForward; } set { flyForward = value; } }
     public bool Levitate { get { return flyPlayer; } set { flyPlayer = value; } }
+    public bool GravityOn { get { return gravityOn; } set { gravityOn = value; } }
 }

@@ -59,7 +59,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
@@ -112,6 +112,7 @@ MonoBehaviour:
   - {fileID: 7459224916105965722}
   - {fileID: 8187750852744280381}
   - {fileID: 6108796299934052414}
+  - {fileID: 4963077974405261219}
   m_Object:
   - {fileID: 6108796299386838983}
   m_PlayerName: {fileID: 8526899647275783986}
@@ -132,7 +133,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

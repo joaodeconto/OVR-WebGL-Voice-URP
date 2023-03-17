@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarSettings: {fileID: 11400000, guid: 40da89d4b338daf4592bb38044618d3f, type: 2}
   avatarParent: {fileID: 2262380910762279484}
+  animatorController: {fileID: 0}

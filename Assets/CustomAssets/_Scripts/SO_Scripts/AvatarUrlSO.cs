@@ -11,6 +11,7 @@ public class AvatarUrlSO : ScriptableObject
     {
         if (index >= 0 && index < m_AvatarUrls.Length)
         {
+            Debug.LogWarning("avatar URL index: " + index);
             return m_AvatarUrls[index];
         }
         else

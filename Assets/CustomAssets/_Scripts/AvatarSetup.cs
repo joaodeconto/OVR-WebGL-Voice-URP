@@ -1,23 +1,51 @@
-
-using BWV.Player;
+using Photon.Pun;
 using ReadyPlayerMe.AvatarLoader;
 using UnityEngine;
 
-public class AvatarSetup : MonoBehaviour
+namespace BWV.Player
 {
-    public AvatarSettingsSO avatarSettings;
-
-    public void SetupAvatar(GameObject avatar)
-    {     
-        avatar.transform.localPosition = avatarSettings.position;
-        avatar.transform.localRotation = avatarSettings.rotation;
-
-        if (avatarSettings.animator != null)
+    public class AvatarSetup : MonoBehaviour
+    {
+        public AvatarSettingsSO avatarSettings;
+        private GameObject avatar;
+        private Animator animator;
+        //private PhotonAnimatorView photonAnimator;
+        public void SetupAvatar(GameObject avatarObj, bool isPlayer)
         {
-            Animator animator = avatar.GetComponent<Animator>();
-            if (animator != null)
+            avatar = avatarObj;
+            
+            avatar.transform.localPosition = avatarSettings.position;
+            avatar.transform.localRotation = avatarSettings.rotation;
+            animator = gameObject.GetComponent<Animator>();
+            animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+            animator.applyRootMotion = false;
+            avatar.AddComponent<EyeAnimationHandler>();
+            //avatar.AddComponent<VoiceHandler>();
+
+            if (avatarSettings.animator != null)
             {
-                animator.runtimeAnimatorController = avatarSettings.animator;
+                animator = avatar.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    animator.runtimeAnimatorController = avatarSettings.animator;
+                }
+            }
+
+            if(isPlayer)SetupSynchronizeParameters();
+
+        }
+        void SetupSynchronizeParameters()
+        {
+            //PhotonView photonView = gameObject.AddComponent<PhotonView>();
+            PhotonAnimatorView photonAnimator = avatar.AddComponent<PhotonAnimatorView>();
+            //photonAnimator.SetLayerSynchronized(0, PhotonAnimatorView.SynchronizeType.Discrete);
+            //photonAnimator.SetParameterSynchronized("Forward", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Continuous);
+            //photonAnimator.SetParameterSynchronized("Strafe", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Discrete);
+            //photonAnimator.SetParameterSynchronized("Speed", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Discrete);
+            foreach (var a in photonAnimator.GetSynchronizedParameters())
+            {
+                Debug.LogError(a.SynchronizeType + "    " + a.Name);
+                //a.SynchronizeType = PhotonAnimatorView.SynchronizeType.Discrete;
             }
         }
     }

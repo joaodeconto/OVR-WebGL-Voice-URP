@@ -44,10 +44,5 @@ namespace BWV.Player
         {
             info.Sender.TagObject = this.gameObject;
         }
-
-        public int WrapIndex(int index, int bufferLength)
-        {
-            return (index % bufferLength + bufferLength) % bufferLength;
-        }
     }
 }
