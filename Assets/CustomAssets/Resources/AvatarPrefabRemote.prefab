@@ -780,6 +780,7 @@ GameObject:
   - component: {fileID: 998371164989009546}
   - component: {fileID: 6108796299934052414}
   - component: {fileID: 6108796299934052404}
+  - component: {fileID: 4075667053198691095}
   m_Layer: 0
   m_Name: AvatarPrefabRemote
   m_TagString: Untagged
@@ -825,6 +826,7 @@ MonoBehaviour:
   observableSearch: 1
   ObservedComponents:
   - {fileID: 2694966613629521299}
+  - {fileID: 7435533740083505616}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -869,7 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatarSettings: {fileID: 11400000, guid: 40da89d4b338daf4592bb38044618d3f, type: 2}
-  avatarContainer: {fileID: 0}
+  avatarContainer: {fileID: 5138087163855249227}
 --- !u!54 &6108796299934052414
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -900,6 +902,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4075667053198691095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694966613629521298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5636b2bf75eb0ce4fb2fd0ac7643cbd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerName: {fileID: 8526899647275783986}
 --- !u!1 &2871278162113546390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,7 +1551,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4372919028284185986}
   - component: {fileID: 3939775345392277780}
-  - component: {fileID: 4992672295608634598}
+  - component: {fileID: 7908721475862903580}
+  - component: {fileID: 7435533740083505616}
   m_Layer: 0
   m_Name: AvatarObj
   m_TagString: Untagged
@@ -1583,7 +1599,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4992672295608634598
+--- !u!114 &7908721475862903580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138087163855249227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 503457712e2a41642b704331cea64a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avatarSettings: {fileID: 11400000, guid: 40da89d4b338daf4592bb38044618d3f, type: 2}
+--- !u!114 &7435533740083505616
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

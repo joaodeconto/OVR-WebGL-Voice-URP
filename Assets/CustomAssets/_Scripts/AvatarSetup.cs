@@ -7,6 +7,7 @@ namespace BWV.Player
     public class AvatarSetup : MonoBehaviour
     {
         public AvatarSettingsSO avatarSettings;
+        private PhotonAnimatorView photonAnimator;
         private GameObject avatarGo;
         private Animator animator;
         private Avatar avatarType;
@@ -17,18 +18,18 @@ namespace BWV.Player
             avatarGo.transform.localRotation = avatarSettings.rotation;
 
             animator = avatarGo.GetComponent<Animator>();
-            animator.Rebind();
             animator.applyRootMotion = false;
             animator.avatar = avatarType;
+            animator.Rebind();
             if (animator.runtimeAnimatorController == null)
                 animator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("AvatarController");
 
-            if (!GetComponent<PhotonAnimatorView>())
+            if (!gameObject.TryGetComponent<PhotonAnimatorView>(out var photonAnimator))
                 SetupSynchronizeParameters();
         }
         void SetupSynchronizeParameters()
         {
-            PhotonAnimatorView photonAnimator = avatarGo.AddComponent<PhotonAnimatorView>();
+            photonAnimator = avatarGo.AddComponent<PhotonAnimatorView>();
             photonAnimator.SetLayerSynchronized(0, PhotonAnimatorView.SynchronizeType.Disabled);
             photonAnimator.SetParameterSynchronized("Forward", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Discrete);
             photonAnimator.SetParameterSynchronized("Strafe", PhotonAnimatorView.ParameterType.Float, PhotonAnimatorView.SynchronizeType.Discrete);

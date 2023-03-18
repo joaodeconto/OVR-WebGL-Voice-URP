@@ -783,6 +783,7 @@ GameObject:
   - component: {fileID: 7459224916105965722}
   - component: {fileID: 8187750852744280381}
   - component: {fileID: 4963077974405261219}
+  - component: {fileID: -6341312854619096064}
   m_Layer: 0
   m_Name: AvatarPrefabLocal
   m_TagString: Untagged
@@ -964,6 +965,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5145515970069056593}
   speedMultiplier: 1
+--- !u!114 &-6341312854619096064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694966613629521298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5636b2bf75eb0ce4fb2fd0ac7643cbd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlayerName: {fileID: 8526899647275783986}
 --- !u!1 &2749506738811863825
 GameObject:
   m_ObjectHideFlags: 0

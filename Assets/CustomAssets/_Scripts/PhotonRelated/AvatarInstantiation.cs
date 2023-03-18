@@ -85,6 +85,7 @@ namespace BWV.Player
 
             PhotonView photonView = player.GetComponent<PhotonView>();
 
+
             if (PhotonNetwork.AllocateViewID(photonView))
             {
                 GameManager.AvatarUrlSO.CurrentUrl = GameManager.AvatarUrlSO.GetAvatarUrl(Random.Range(0, 5));
@@ -104,6 +105,7 @@ namespace BWV.Player
                 {
                     CharacterInstantiated(player);
                 }
+                PhotonNetwork.LocalPlayer.TagObject = player;
             }
             else
             {
@@ -138,8 +140,8 @@ namespace BWV.Player
                 WebAvatarLoader wb = player.GetComponent<WebAvatarLoader>();
                 AvatarSettingsSO so = ScriptableObject.CreateInstance<AvatarSettingsSO>();
                 so.avatarUrl = (string)data[4];                
-                wb.avatarSettings = so;
-                
+                wb.avatarSettings = so;             
+                photonView.Owner.TagObject = player;
             }
         }       
     }

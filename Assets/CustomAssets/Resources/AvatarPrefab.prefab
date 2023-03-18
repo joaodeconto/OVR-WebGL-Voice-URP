@@ -783,6 +783,7 @@ GameObject:
   - component: {fileID: 7459224916105965722}
   - component: {fileID: 8187750852744280381}
   - component: {fileID: 4963077974405261219}
+  - component: {fileID: 5331021561333763895}
   m_Layer: 0
   m_Name: AvatarPrefab
   m_TagString: Untagged
@@ -964,6 +965,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   speedMultiplier: 1
+--- !u!114 &5331021561333763895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2694966613629521298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5636b2bf75eb0ce4fb2fd0ac7643cbd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2749506738811863825
 GameObject:
   m_ObjectHideFlags: 0

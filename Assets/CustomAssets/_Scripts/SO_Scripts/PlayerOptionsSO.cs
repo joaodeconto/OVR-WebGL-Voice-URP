@@ -20,6 +20,7 @@ public class PlayerOptionsSO : ScriptableObject
     public bool moveViewX = true;
     public bool moveViewY = true;
     public float lookSensitivity = .5f;
+    public float smoothLookFactor = 10f;
 
     [Header("View Rotation Clamp")]
     public float xMax = 80f;

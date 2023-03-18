@@ -20,6 +20,8 @@ namespace BWV.Player
         private bool isLoading;
 
         public event Action OnAvatarLoaded; // Invoked when the avatar has finished loading.
+        
+        public static event Action<bool> LoadingStateChanged;
 
         private void Awake()
         {
@@ -49,6 +51,7 @@ namespace BWV.Player
             {
                 LoadAvatar(avatarUrl);
             }
+            LoadingStateChanged?.Invoke(true);
         }
 
         private string GetAvatarUrlFromInstantiate()
@@ -92,6 +95,7 @@ namespace BWV.Player
                     Debug.LogError("Failed to load avatar from URL: " + avatarUrl);
                 }
                 isLoading = false;
+                LoadingStateChanged?.Invoke(false);
             };
             avatarLoader.LoadAvatar(avatarUrl);
         }
@@ -102,7 +106,6 @@ namespace BWV.Player
 
         private void SetupAvatar(bool isPlayer)
         {
-            Debug.Log("ou no seutp");
             if (!avatar)
             {
                 Debug.LogError("Avatar game object is not set.");

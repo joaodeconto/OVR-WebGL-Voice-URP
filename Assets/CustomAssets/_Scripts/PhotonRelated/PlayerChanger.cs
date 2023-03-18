@@ -67,7 +67,7 @@ public class PlayerChanger : MonoBehaviourPunCallbacks, IOnEventCallback
                         GameObject playerObject = p.TagObject as GameObject;
                         if (playerObject != null)
                         {
-                            //playerObject.GetComponent<PlayerController>().m_PlayerName.text = newName;
+                            playerObject.GetComponent<PlayerController>().PlayerName = newName;
                         }
                         else Debug.LogError("Null Gameobject");
                         break;

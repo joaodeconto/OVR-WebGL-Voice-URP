@@ -1,6 +1,7 @@
 using BWV.Interface;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.DefaultInputActions;
 
 namespace BWV.Player
 {
@@ -58,12 +59,14 @@ namespace BWV.Player
 
             if (playerOptions.moveViewX || playerOptions.moveViewY)
             {
+                // Calculate the target rotation based on input
                 xRotation -= viewInput.y;
                 xRotation = Mathf.Clamp(xRotation, playerOptions.xMin, playerOptions.xMax);
                 targetRotation = Quaternion.Euler(xRotation, targetRotation.eulerAngles.y + viewInput.x, 0);
 
-                transform.rotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
-                playerCamera.transform.localRotation = Quaternion.Euler(targetRotation.eulerAngles.x, 0, targetRotation.eulerAngles.z);
+                // Smoothly rotate towards the target rotation
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, targetRotation.eulerAngles.y, 0), Time.deltaTime * playerOptions.smoothLookFactor);
+                playerCamera.transform.localRotation = Quaternion.Lerp(playerCamera.transform.localRotation, Quaternion.Euler(targetRotation.eulerAngles.x, 0, targetRotation.eulerAngles.z), Time.deltaTime * playerOptions.smoothLookFactor);
             }
 
             if (playerOptions.flyPlayer)
@@ -73,6 +76,7 @@ namespace BWV.Player
                 Vector3 velocity = flyVertical * playerOptions.flySpeed;
                 transform.position += velocity * Time.deltaTime;
             }
+            if(transform.position.y < -100) RestorePlayerPosition();
         }
 
         void RestorePlayerPosition()
