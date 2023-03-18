@@ -5,7 +5,7 @@ namespace BWV.Player
 {
     public class CharacterAnimatorController : MonoBehaviour
     {
-        public Animator animator { get; set; }
+        public Animator animator;
         [SerializeField] private float speedMultiplier = 1f;
 
         private ICharacterInput characterInput;

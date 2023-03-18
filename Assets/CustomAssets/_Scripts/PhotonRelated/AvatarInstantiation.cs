@@ -135,7 +135,7 @@ namespace BWV.Player
                 PhotonView photonView = player.GetComponent<PhotonView>();
                 photonView.ViewID = (int)data[3];
                 player.name += this.remotePrefabSuffix + photonView.ViewID;
-                WebAvatarLoader wb = player.GetComponentInChildren<WebAvatarLoader>();
+                WebAvatarLoader wb = player.GetComponent<WebAvatarLoader>();
                 AvatarSettingsSO so = ScriptableObject.CreateInstance<AvatarSettingsSO>();
                 so.avatarUrl = (string)data[4];                
                 wb.avatarSettings = so;

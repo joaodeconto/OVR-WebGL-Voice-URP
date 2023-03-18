@@ -7,6 +7,11 @@ public class AvatarUrlSO : ScriptableObject
     private string[] m_AvatarUrls;
 
     public string CurrentUrl;
+
+    public string GetRandomAvatar()
+    {
+        return GetAvatarUrl(Random.Range(0, m_AvatarUrls.Length));
+    }
     public string GetAvatarUrl(int index)
     {
         if (index >= 0 && index < m_AvatarUrls.Length)
