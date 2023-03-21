@@ -872,7 +872,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -977,6 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5636b2bf75eb0ce4fb2fd0ac7643cbd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PlayerName: {fileID: 0}
 --- !u!1 &2749506738811863825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,7 +2429,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

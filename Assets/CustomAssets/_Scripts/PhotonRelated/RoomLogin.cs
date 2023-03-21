@@ -7,9 +7,6 @@ using BWV.Player;
 
 public class RoomLogin : MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private GameObject avatarPrefab; 
-
     void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
